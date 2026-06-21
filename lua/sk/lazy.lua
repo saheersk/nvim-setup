@@ -12,10 +12,10 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({ 
-  { import = "josean.plugins" }, 
-  { import = "josean.plugins.lsp" },
-  { import = "josean.plugins.ai-tools" },
-  { import = "josean.plugins.productivity-tools" }
+  { import = "sk.plugins" }, 
+  { import = "sk.plugins.lsp" },
+  { import = "sk.plugins.ai-tools" },
+  { import = "sk.plugins.productivity-tools" }
 }, {
   install = {
     colorscheme = { "kanagawa" },

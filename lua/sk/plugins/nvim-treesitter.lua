@@ -54,8 +54,12 @@ return {
         },
       })
 
-      -- enable nvim-ts-context-commentstring plugin for commenting tsx and jsx
-      require('ts_context_commentstring').setup {}
+      -- enable nvim-ts-context-commentstring for commenting tsx/jsx.
+      -- Disable its legacy CursorHold autocmd: it crashes on buffers without a
+      -- parser, and is redundant because Comment.nvim drives it on-demand via
+      -- create_pre_hook() (see comment.lua).
+      vim.g.skip_ts_context_commentstring_module = true
+      require('ts_context_commentstring').setup { enable_autocmd = false }
     end,
   },
 }

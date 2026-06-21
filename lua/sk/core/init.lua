@@ -1,2 +1,3 @@
-require("josean.core.keymaps")
-require("josean.core.options")
+require("sk.core.compat")
+require("sk.core.keymaps")
+require("sk.core.options")

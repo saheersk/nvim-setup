@@ -5,13 +5,6 @@ return {
     "WhoIsSethDaniel/mason-tool-installer.nvim",
   },
   config = function()
-    -- Patch the automatic enable feature to prevent the error
-    local success, automatic_enable = pcall(require, "mason-lspconfig.features.automatic_enable")
-    if success then
-      -- Override the problematic init function
-      automatic_enable.init = function() end
-    end
-    
     -- import mason
     local mason = require("mason")
 
@@ -31,7 +24,6 @@ return {
       },
     })
 
-    -- Setup mason-lspconfig with explicit handlers to avoid automatic enable
     mason_lspconfig.setup({
       ensure_installed = {
         "ts_ls",
@@ -40,12 +32,9 @@ return {
         "lua_ls",
         "pyright",
       },
-      automatic_installation = false, -- Disable automatic installation
-      automatic_setup = false, -- Disable automatic setup to prevent conflicts
-      handlers = {
-        -- Default handler that does nothing (prevents automatic setup)
-        function(server_name) end,
-      },
+      -- We enable servers explicitly via vim.lsp.enable() in lspconfig.lua,
+      -- so disable mason-lspconfig's auto-enable to avoid enabling twice.
+      automatic_enable = false,
     })
 
     mason_tool_installer.setup({

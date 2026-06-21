@@ -20,12 +20,13 @@ return {
     vim.api.nvim_create_autocmd({ "BufEnter", "BufWritePost", "InsertLeave" }, {
       group = lint_augroup,
       callback = function()
-        lint.try_lint()
+        -- guard so a missing/misconfigured linter never breaks the autocmd
+        pcall(lint.try_lint)
       end,
     })
 
     vim.keymap.set("n", "<leader>l", function()
-      lint.try_lint()
+      pcall(lint.try_lint)
     end, { desc = "Trigger linting for current file" })
   end,
 }
