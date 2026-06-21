@@ -25,7 +25,8 @@ return {
       end,
     })
 
-    vim.keymap.set("n", "<leader>l", function()
+    -- <leader>L (capital) so it doesn't shadow <leader>lg (lazygit)
+    vim.keymap.set("n", "<leader>L", function()
       pcall(lint.try_lint)
     end, { desc = "Trigger linting for current file" })
   end,
